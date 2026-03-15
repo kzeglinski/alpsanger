@@ -8,6 +8,10 @@ process tracy_basecall {
 
     tag "${sample_id}"
     label 'process_low'
+    
+	container "${ (workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container) ?
+    'oras://community.wave.seqera.io/library/tracy:0.8.1--869f2d602de8570b' :
+    'community.wave.seqera.io/library/tracy:0.8.1--0988e4620d7132d3' }"
 
     input:
     (sample_id, ab1_file): Tuple<String, Path>
