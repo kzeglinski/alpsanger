@@ -9,6 +9,10 @@ process igblast {
     tag "${sample_id}"
     label 'process_medium'
 
+    container "${ (workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container) ?
+    'oras://community.wave.seqera.io/library/igblast:1.22.0--3588511b44218582' :
+    'community.wave.seqera.io/library/igblast:1.22.0--df7afc24896f633e' }"
+    
     input:
     (igblast_db, sample_id, fasta_file): Tuple<Path, String, Path>
     igblast_organism: String

@@ -10,6 +10,11 @@ process seqkit_replace_gaps {
     tag "${sample_id}"
     label 'process_low'
 
+    container "${ (workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container) ?
+    'oras://community.wave.seqera.io/library/seqkit:2.13.0--205358a3675c7775' :
+    'community.wave.seqera.io/library/seqkit:2.13.0--05c0a96bf9fb2751' }"
+
+
     input:
     (sample_id, fasta_file): Tuple<String, Path>
 

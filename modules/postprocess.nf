@@ -9,6 +9,10 @@ process postprocess {
     tag 'postprocess'
     label 'process_low'
 
+    container "${ (workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container) ?
+    'oras://community.wave.seqera.io/library/bioconductor-cellarepertorium_r-openxlsx_r-tidyverse:c05a8219e22916a8' :
+    'community.wave.seqera.io/library/bioconductor-cellarepertorium_r-openxlsx_r-tidyverse:9cf9dbd8126bcd40' }"
+
     input:
     tsv_files: List<Path> // collected list of all per-sample .igblast.tsv files
 
