@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/YOUR_PIPELINE/master/nextflow_schema.json",
+    "title": "Nextflow pipeline parameters",
+    "description": "This pipeline uses Nextflow and processes some kind of data. The JSON Schema was built using the nf-core pipeline schema builder.",
+    "type": "object",
+    "properties": {
+        "input_dir": {
+            "type": "string",
+            "description": "Input directory",
+            "help_text": "This folder should contain either .ab1 files (if performing basecalling) or .fasta files (if not performing basecalling)"
+        },
+        "out_dir": {
+            "type": "string",
+            "description": "Output directory",
+            "help_text": "The directory your results will be saved in (must be on **VAST** not stornext)",
+            "default": "\"results\""
+        },
+        "basecall": {
+            "type": "boolean",
+            "default": true,
+            "description": "Perform basecalling?",
+            "help_text": "If true, basecalling will be performed with tracy (https://www.gear-genomics.com/docs/tracy/). This requires .ab1 files and will allow QC to be performed"
+        },
+        "igblast_db": {
+            "type": "string",
+            "description": "Location of IgBLAST database",
+            "help_text": "Alpaca database is included by default. If you want to use a custom database, place it in the same directory or edit this parameter",
+            "default": "\"${projectDir}/bin/igblast_refs\""
+        },
+        "igblast_organism": {
+            "type": "string",
+            "description": "Name of IgBLAST organism",
+            "default": "alpaca"
+        },
+        "help": {
+            "type": "boolean",
+            "description": "Show help message",
+            "hidden": true
+        }
+    },
+    "required": [
+        "input_dir"
+    ]
+}
