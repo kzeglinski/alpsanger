@@ -56,6 +56,9 @@ to_cluster <- airr$cdr3_aa
 names(to_cluster) <- airr$sequence_id
 to_cluster <- na.omit(to_cluster)
 
+# remove stop codons
+to_cluster <- to_cluster[!str_detect(to_cluster, "\\*")]
+
 # do clustering
 cdhit_result <- CellaRepertorium::cdhit(
         Biostrings::AAStringSet(to_cluster),
